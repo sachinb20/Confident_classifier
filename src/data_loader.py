@@ -26,7 +26,7 @@ def getSVHN(batch_size, img_size=32, data_root='/tmp/public_dataset/pytorch', tr
             datasets.SVHN(
                 root=data_root, split='train', download=True,
                 transform=transforms.Compose([
-                    transforms.Scale(img_size),
+                    transforms.Resize(img_size),
                     transforms.ToTensor(),
                 ]),
                 target_transform=target_transform,
@@ -39,7 +39,7 @@ def getSVHN(batch_size, img_size=32, data_root='/tmp/public_dataset/pytorch', tr
             datasets.SVHN(
                 root=data_root, split='test', download=True,
                 transform=transforms.Compose([
-                    transforms.Scale(img_size),
+                    transforms.Resize(img_size),
                     transforms.ToTensor(),
                 ]),
                 target_transform=target_transform
@@ -60,7 +60,7 @@ def getCIFAR10(batch_size, img_size=32, data_root='/tmp/public_dataset/pytorch',
             datasets.CIFAR10(
                 root=data_root, train=True, download=True,
                 transform=transforms.Compose([
-                    transforms.Scale(img_size),
+                    transforms.Resize(img_size),
                     transforms.ToTensor(),
                 ])),
             batch_size=batch_size, shuffle=True, **kwargs)
@@ -70,7 +70,7 @@ def getCIFAR10(batch_size, img_size=32, data_root='/tmp/public_dataset/pytorch',
             datasets.CIFAR10(
                 root=data_root, train=False, download=True,
                 transform=transforms.Compose([
-                    transforms.Scale(img_size),
+                    transforms.Resize(img_size),
                     transforms.ToTensor(),
                 ])),
             batch_size=batch_size, shuffle=False, **kwargs)

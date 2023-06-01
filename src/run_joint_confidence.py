@@ -101,6 +101,9 @@ def train(epoch):
         # train with real
         gan_target.fill_(real_label)
         targetv = Variable(gan_target)
+        #Added next line
+        targetv = targetv.unsqueeze(1).float().cuda()
+        #targetv = torch.tensor([targetv]).float().cuda()
         optimizerD.zero_grad()
         output = netD(data)
         errD_real = criterion(output, targetv)
@@ -114,6 +117,9 @@ def train(epoch):
         noise = Variable(noise)
         fake = netG(noise)
         targetv = Variable(gan_target.fill_(fake_label))
+        #Added next line
+        targetv = targetv.unsqueeze(1).float().cuda()
+        #targetv = torch.tensor([targetv]).float().cuda()
         output = netD(fake.detach())
         errD_fake = criterion(output, targetv)
         errD_fake.backward()
@@ -127,6 +133,9 @@ def train(epoch):
         optimizerG.zero_grad()
         # Original GAN loss
         targetv = Variable(gan_target.fill_(real_label))  
+        #Added next line
+        targetv = targetv.unsqueeze(1).float().cuda()
+        #targetv = torch.tensor([targetv]).float().cuda()
         output = netD(fake)
         errG = criterion(output, targetv)
         D_G_z2 = output.data.mean()
